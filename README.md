@@ -1,8 +1,6 @@
 # Desenvolvimento de Cliente WEB - Criptografia e Segurança
 Protótipo de front-end para disciplina Desenvolvimento de Cliente WEB
 
-Protótipo de front-end para disciplina Desenvolvimento de Cliente WEB
-
 # Proposta
 
 Apresentar uma simulação das principais vulnerabilidades de aplicativos WEB.
