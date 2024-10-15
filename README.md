@@ -4,11 +4,44 @@ Protótipo de front-end para disciplina Desenvolvimento de Cliente WEB
 ## Collaborators
 
 <!-- readme: collaborators -start -->
+<table>
+	<tbody>
+		<tr>
+            <td align="center">
+                <a href="https://github.com/gilmar-sales">
+                    <img src="https://avatars.githubusercontent.com/u/7975964?v=4" width="100;" alt="gilmar-sales"/>
+                    <br />
+                    <sub><b>Gilmar Sales</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/carlosjnr27">
+                    <img src="https://avatars.githubusercontent.com/u/75266260?v=4" width="100;" alt="carlosjnr27"/>
+                    <br />
+                    <sub><b>Carlos Rodrigues da Silva Junior</b></sub>
+                </a>
+            </td>
+		</tr>
+	<tbody>
+</table>
 <!-- readme: collaborators -end -->
 
 ## Contributors
 
 <!-- readme: contributors -start -->
+<table>
+	<tbody>
+		<tr>
+            <td align="center">
+                <a href="https://github.com/gilmar-sales">
+                    <img src="https://avatars.githubusercontent.com/u/7975964?v=4" width="100;" alt="gilmar-sales"/>
+                    <br />
+                    <sub><b>Gilmar Sales</b></sub>
+                </a>
+            </td>
+		</tr>
+	<tbody>
+</table>
 <!-- readme: contributors -end -->
 
 # Proposta
