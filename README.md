@@ -1,7 +1,7 @@
 # Desenvolvimento de Cliente WEB - Criptografia e Segurança
 Protótipo de front-end para disciplina Desenvolvimento de Cliente WEB
 
-## Collaborators
+## Colaboradores
 
 <!-- readme: collaborators -start -->
 <table>
@@ -25,24 +25,6 @@ Protótipo de front-end para disciplina Desenvolvimento de Cliente WEB
 	<tbody>
 </table>
 <!-- readme: collaborators -end -->
-
-## Contributors
-
-<!-- readme: contributors -start -->
-<table>
-	<tbody>
-		<tr>
-            <td align="center">
-                <a href="https://github.com/gilmar-sales">
-                    <img src="https://avatars.githubusercontent.com/u/7975964?v=4" width="100;" alt="gilmar-sales"/>
-                    <br />
-                    <sub><b>Gilmar Sales</b></sub>
-                </a>
-            </td>
-		</tr>
-	<tbody>
-</table>
-<!-- readme: contributors -end -->
 
 # Proposta
 
