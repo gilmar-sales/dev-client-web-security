@@ -1,6 +1,16 @@
 # Desenvolvimento de Cliente WEB - Criptografia e Segurança
 Protótipo de front-end para disciplina Desenvolvimento de Cliente WEB
 
+## Collaborators
+
+<!-- readme: collaborators -start -->
+<!-- readme: collaborators -end -->
+
+## Contributors
+
+<!-- readme: contributors -start -->
+<!-- readme: contributors -end -->
+
 # Proposta
 
 Apresentar uma simulação das principais vulnerabilidades de aplicativos WEB.
