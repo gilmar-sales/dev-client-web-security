@@ -1,12 +1,11 @@
 import { Body, Controller, Get, Post, Render, Req, Res } from '@nestjs/common';
-import { Response, Request } from 'express'
+import { Response, Request } from 'express';
 
 import { AppService } from './app.service';
 
-
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) { }
+  constructor(private readonly appService: AppService) {}
 
   @Get()
   @Render('index')
@@ -21,14 +20,19 @@ export class AppController {
   }
 
   @Post('login')
-  login(@Body() credencial: { username: string, password: string }, @Res() response: Response) {
-    if (credencial.username === 'admin' &&
-      credencial.password === 'admin'
-    ) {
-      return response.cookie('token', 'imagine um token importante aqui').cookie('login', credencial.username).redirect('/');
+  login(
+    @Body() credencial: { username: string; password: string },
+    @Res() response: Response,
+  ) {
+    if (credencial.username === 'admin' && credencial.password === 'admin') {
+      return response
+        .cookie('token', 'imagine um token importante aqui', {
+          sameSite: 'lax',
+        })
+        .cookie('login', credencial.username)
+        .redirect('/');
     }
 
     return response.status(401).send();
   }
-
 }
