@@ -13,7 +13,7 @@ async function bootstrap() {
   app.useStaticAssets(join(__dirname, '..', 'public'));
   app.setBaseViewsDir(join(__dirname, '..', 'views'));
   app.setViewEngine('hbs');
-  app.use(cookieParser());
+  app.use(cookieParser("2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b"));
   
   await app.listen(process.env.PORT ?? 3000);
 }
