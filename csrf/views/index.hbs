@@ -12,10 +12,12 @@
   {{#if token}}
   <div class="d-flex justify-content-between position-absolute top-0 start-0 bg-primary vw-100 p-2">
     <span class="d-flex h-100 text-white text-center p-2">
-    Bem-vindo
-    <span class="text-primary-emphasis mx-2">{{ username }}</span>
+      Bem-vindo
+      <span class="text-primary-emphasis mx-2">{{ username }}</span>
     </span>
-    <button class="btn btn-danger">Sair</button>
+    <form action="/logout" method="post">
+      <button type="submit" class="btn btn-danger">Sair</button>
+    </form>
   </div>
   <h1>
     Bem-vindo {{ username }}</h1>
