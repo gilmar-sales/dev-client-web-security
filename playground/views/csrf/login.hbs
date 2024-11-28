@@ -11,12 +11,13 @@
 <body class="bg-body-tertiary">
 
   <main class="d-flex flex-column justify-content-center align-items-center vh-100 w-60 align-middle">
+    <h1>Cross-Site Request Forgery</h1>
     <div class="card">
       <div class="card-header">
         Sign-In
       </div>
       <div class="card-body">
-        <form class="row g-3" action="/login" method="post">
+        <form class="row g-3" action="/csrf/login" method="post">
           <input class="form-control" id="username" name="username" placeholder="Usuário" />
           <input class="form-control" id="password" name="password" type="password" placeholder="Senha" />
           <button class="btn btn-primary" type="submit">Entrar</button>

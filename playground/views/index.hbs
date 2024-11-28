@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Desenvolvimento de Cliente WEB - Criptografia e Segurança</title>
+  <link rel="stylesheet" href="https://supreme-meme-7j6v5x4qqr3w69g-3001.app.github.dev/file?name=boostrap.css" />
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self' https://avatars.githubusercontent.com; script-src-elem 'none'; script-src 'none';">
+</head>
+
+<body>
+  <div class="vh-100 d-flex flex-column justify-content-evenly align-items-center">
+
+    <h1>Desenvolvimento de Cliente WEB - Criptografia e Segurança</h1>
+
+    <div class="d-flex gap-lg">
+
+      <img width="100" class="rounded-circle" src="https://avatars.githubusercontent.com/u/7975964" />
+      <img width="100" class="rounded-circle" src="https://avatars.githubusercontent.com/u/75266260" />
+
+    </div>
+
+    <h2>Playground de simulação das principais vulnerabilidades de aplicativos WEB</h2>
+    <div class="vw-100 d-flex justify-content-evenly">
+      <div class="vw-100 p-4 d-flex flex-column justify-content-between">
+        <h3>Cross-Site Request Forgery</h3>
+        <p>Ocorre quando sites de terceiros conseguem interceptar as credenciais dos usuários de um aplicativo.</p>
+        <a class="btn btn-primary" href="/csrf">Acessar ambiente CSRF</a>
+      </div>
+      <div class="vw-100 p-4 d-flex flex-column justify-content-between">
+        <h3>Cross-Site Scripting</h3>
+        <p>Normalmente ocorre quando se utiliza conteúdos de terceiros (CDNs, Propagandas, etc...) em uma aplicação, esses conteúdos podem conseguir injetar algum script malicioso.</p>
+        <a class="btn btn-primary" href="/xss">Acessar ambiente XSS</a>
+      </div>
+      <div class="vw-100 p-4 d-flex flex-column justify-content-between">
+        <h3>Denial of Service</h3>
+        <p>Ataques de negação de serviço podem acontecer pela força bruta, que podem ser barrados com uma simples limitação de requisições por usuário, porém, caso um usuário encontre um endpoint que possui um algoritmo muito complexo assintoticamente, este endpoint poderá ser explorado para negar o serviço sem passar do limite de requisições.</p>
+        <a class="btn btn-primary" href="/dos">Acessar ambiente DoS</a>
+      </div>
+    </div>
+  </div>
+  <script>
+    var script = document.createElement('script');
+    script.nonce = "fake-cdn";
+    script.src = 'https://supreme-meme-7j6v5x4qqr3w69g-3001.app.github.dev/file?name=jquery.js';
+    script.type = 'text/javascript';
+    document.getElementsByTagName('head')[0].appendChild(script);
+  </script>
+</body>
+
+</html>

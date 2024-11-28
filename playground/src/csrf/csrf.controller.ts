@@ -1,23 +1,19 @@
 import { Body, Controller, Get, Post, Render, Req, Res } from '@nestjs/common';
 import { Response, Request, CookieOptions } from 'express';
 
-import { AppService } from './app.service';
-
-@Controller()
-export class AppController {
-  constructor(private readonly appService: AppService) {}
-
+@Controller('csrf')
+export class CsrfController {
   @Get()
-  @Render('index')
+  @Render('csrf/home')
   getIndex(@Req() request: Request, @Res() response: Response) {
     if (!request.cookies.token && !request.signedCookies.token)
-      return response.redirect('/login')
+      return response.redirect('/csrf/login')
 
     return { ...request.signedCookies, ...request.cookies };
   }
 
   @Get('login')
-  @Render('login')
+  @Render('csrf/login')
   getLogin() {
     return { message: 'Hello world!' };
   }
@@ -41,10 +37,10 @@ export class AppController {
       .cookie('token', 'imagine um token importante aqui', cookieOptions)
       .cookie('username', credencial.username, cookieOptions)
       .cookie('password', credencial.username, cookieOptions)
-      .redirect('/');
+      .redirect('/csrf');
   }
 
-  @Post('logout')
+  @Post('/logout')
   logout(
     @Res() response: Response,
   ) {
@@ -52,6 +48,6 @@ export class AppController {
       .clearCookie('token')
       .clearCookie('username')
       .clearCookie('password')
-      .redirect('/login');
+      .redirect('/csrf/login');
   }
 }
