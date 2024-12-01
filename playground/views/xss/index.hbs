@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Desenvolvimento de Cliente WEB - Criptografia e Segurança</title>
+    <link rel="stylesheet" href="https://supreme-meme-7j6v5x4qqr3w69g-3001.app.github.dev/file?name=boostrap.css" />
+    {{#if habilitaContentSecurityPolicy}}
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' https://avatars.githubusercontent.com; script-src-elem 'none'; script-src 'none';">
+    {{/if}}
+</head>
+
+<body>
+
+    <script>
+        var script = document.createElement('script');
+        script.nonce = "fake-cdn";
+        script.src = 'https://supreme-meme-7j6v5x4qqr3w69g-3001.app.github.dev/file?name=jquery.js';
+        script.type = 'text/javascript';
+        document.getElementsByTagName('head')[0].appendChild(script);
+    </script>
+</body>
+
+</html>

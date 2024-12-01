@@ -1,16 +1,16 @@
-import { Body, Controller, Get, Post, Render, Req, Res } from '@nestjs/common';
-import { Response, Request, CookieOptions } from 'express';
+import { Controller, Get, Render, UseGuards } from '@nestjs/common';
 
 import { AppService } from './app.service';
+import { ThrottlerGuard } from '@nestjs/throttler';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService) { }
 
   @Get()
   @Render('index')
-  getIndex(@Req() request: Request, @Res() response: Response) {
-
-    return {  };
+  @UseGuards(ThrottlerGuard)
+  getIndex() {
+    return {};
   }
 }
