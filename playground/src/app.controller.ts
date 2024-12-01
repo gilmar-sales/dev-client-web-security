@@ -1,7 +1,6 @@
-import { Controller, Get, Inject, Render, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, Render, Req, UseGuards } from '@nestjs/common';
 import { AppService } from './app.service';
 import { ThrottlerGuard } from '@nestjs/throttler';
-import { Cache, CACHE_MANAGER } from '@nestjs/cache-manager';
 import { ConfigService } from './config/config.service';
 import { Request } from 'express';
 import { ConfigKey } from './middlewares/config-context-middleware';
