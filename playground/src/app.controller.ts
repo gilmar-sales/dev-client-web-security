@@ -1,16 +1,21 @@
-import { Controller, Get, Render, UseGuards } from '@nestjs/common';
-
+import { Controller, Get, Inject, Render, Req, UseGuards } from '@nestjs/common';
 import { AppService } from './app.service';
 import { ThrottlerGuard } from '@nestjs/throttler';
+import { Cache, CACHE_MANAGER } from '@nestjs/cache-manager';
+import { ConfigService } from './config/config.service';
+import { Request } from 'express';
+import { ConfigKey } from './middlewares/config-context-middleware';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) { }
+  constructor(private readonly appService: AppService, private readonly configService: ConfigService) { }
 
   @Get()
   @Render('index')
   @UseGuards(ThrottlerGuard)
-  getIndex() {
-    return {};
+  getIndex(@Req() request: Request) {
+    const config = this.configService.getConfig(request.cookies[ConfigKey])
+
+    return config;
   }
 }
