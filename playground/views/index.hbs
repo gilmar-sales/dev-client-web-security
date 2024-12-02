@@ -5,8 +5,10 @@
   <meta charset="utf-8" />
   <title>Desenvolvimento de Cliente WEB - Criptografia e Segurança</title>
   <link rel="stylesheet" href="https://supreme-meme-7j6v5x4qqr3w69g-3001.app.github.dev/file?name=boostrap.css" />
+  {{#if xss.contentSecurityPolicy}}
   <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self' https://avatars.githubusercontent.com; script-src-elem 'none'; script-src 'none';">
+    content="script-src-elem 'none'; script-src 'none';">
+  {{/if}}
 </head>
 
 <body>
@@ -14,28 +16,96 @@
 
     <h1>Desenvolvimento de Cliente WEB - Criptografia e Segurança</h1>
 
-    <div class="d-flex gap-lg">
+    <div class="d-flex justify-content-evenly gap-lg">
 
-      <img width="100" class="rounded-circle" src="https://avatars.githubusercontent.com/u/7975964" />
-      <img width="100" class="rounded-circle" src="https://avatars.githubusercontent.com/u/75266260" />
+      <div class="d-flex flex-column align-items-center p-4">
+        <img width="100" class="rounded-circle" src="https://avatars.githubusercontent.com/u/75266260" />
+        <h3>Carlos Rodrigues da Silva Junior</h3>
+      </div>
+
+      <div class="d-flex flex-column align-items-center p-4">
+        <img width="100" class="rounded-circle" src="https://avatars.githubusercontent.com/u/7975964" />
+        <h3>Gilmar Custodio de Sales</h3>
+      </div>
 
     </div>
 
     <h2>Playground de simulação das principais vulnerabilidades de aplicativos WEB</h2>
-    <div class="vw-100 d-flex justify-content-evenly">
-      <div class="vw-100 p-4 d-flex flex-column justify-content-between">
+    <div class="px-5 vw-100 d-flex justify-content-evenly">
+      <form class="vw-100 p-4 d-flex flex-column justify-content-between" action="/csrf" method="post">
         <h3>Cross-Site Request Forgery</h3>
         <p>Ocorre quando sites de terceiros conseguem interceptar as credenciais dos usuários de um aplicativo.</p>
-        <a class="btn btn-primary" href="/csrf">Acessar ambiente CSRF</a>
-      </div>
+        <div class="px-4 pb-4">
+          <div class="form-check">
+            <input class="form-check-input" name="secureCookies" type="checkbox" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Cookies Via SSL
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" name="httpOnlyCookies" type="checkbox" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Cookies HttpOnly
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" name="sameSiteCookies" type="checkbox" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Cookies SameSite Strict
+            </label>
+          </div>
+
+          <div class="form-check">
+            {{csrf.signedCookies }}
+            <input class="form-check-input" name="signedCookies" type="checkbox" id="flexCheckDefault" {{#if csrf.signedCookies}} checked {{/if}}>
+            <label class="form-check-label" for="flexCheckDefault">
+              Cookies Assinados
+            </label>
+          </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Acessar ambiente CSRF</button>
+      </form>
       <div class="vw-100 p-4 d-flex flex-column justify-content-between">
         <h3>Cross-Site Scripting</h3>
-        <p>Normalmente ocorre quando se utiliza conteúdos de terceiros (CDNs, Propagandas, etc...) em uma aplicação, esses conteúdos podem conseguir injetar algum script malicioso.</p>
+        <p>Normalmente ocorre quando se utiliza conteúdos de terceiros (CDNs, Propagandas, etc...) em uma aplicação,
+          esses conteúdos podem conseguir injetar algum script malicioso.</p>
+
+        <div class="px-4 pb-4">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Habilitar Content-Security-Policy
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Habilitar tratamento entrada (JS)
+            </label>
+          </div>
+        </div>
+
         <a class="btn btn-primary" href="/xss">Acessar ambiente XSS</a>
       </div>
       <div class="vw-100 p-4 d-flex flex-column justify-content-between">
         <h3>Denial of Service</h3>
-        <p>Ataques de negação de serviço podem acontecer pela força bruta, que podem ser barrados com uma simples limitação de requisições por usuário, porém, caso um usuário encontre um endpoint que possui um algoritmo muito complexo assintoticamente, este endpoint poderá ser explorado para negar o serviço sem passar do limite de requisições.</p>
+        <p>Ataques de negação de serviço podem acontecer pela força bruta, que podem ser barrados com uma simples
+          limitação de requisições por usuário, porém, caso um usuário encontre um endpoint que possui um algoritmo
+          muito complexo assintoticamente, este endpoint poderá ser explorado para negar o serviço sem passar do limite
+          de requisições.</p>
+
+        <div class="px-4 pb-4">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Habilitar Rate Limiting
+            </label>
+          </div>
+        </div>
+
         <a class="btn btn-primary" href="/dos">Acessar ambiente DoS</a>
       </div>
     </div>

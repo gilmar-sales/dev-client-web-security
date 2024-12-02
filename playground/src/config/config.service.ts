@@ -2,18 +2,18 @@ import { Cache, CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Inject, Injectable } from '@nestjs/common';
 
 interface ConfigContext {
-    csrf: {
-        secureCookies?: true,
-        httpOnlyCookies?: true,
-        sameSiteCookies?: true,
-        signedCookies?: true
+    csrf?: {
+        secureCookies?: boolean,
+        httpOnlyCookies?: boolean,
+        sameSiteCookies?: boolean,
+        signedCookies?: boolean
     },
-    xss: {
+    xss?: {
         contentSecurityPolicy?: boolean;
         sanitizeInput?: boolean;
     },
-    dos: {
-        rateLimiting?: true
+    dos?: {
+        rateLimiting?: boolean
     }
 }
 
@@ -26,14 +26,35 @@ export class ConfigService {
 
   async getConfig(key: string): Promise<ConfigContext>
   {
-    let config = await this.cacheManager.get<ConfigContext>(key);
+    try
+    {
+        let config = await this.cacheManager.get<ConfigContext>(key);
 
-    if (!config) {
-        config = {csrf: {}, xss: {}, dos: {}};
+        console.log(config)
+
+        if (!config)
+            throw new Error('No config found')
+
+        return config
+    }
+    catch(e)
+    {
+        const config = {csrf: {}, xss: {}, dos: {}};
+
+        await this.cacheManager.set(key, config);
+
+        return config
+    }
+  }
+
+  async setConfig(key: string, context: ConfigContext)
+    {
+        let config = await this.getConfig(key);
+
+        Object.keys(context).forEach(objKey => Object.assign(config[objKey], context[objKey]))
+
+        console.log(config)
 
         await this.cacheManager.set(key, config);
     }
-
-    return config
-  }
 }

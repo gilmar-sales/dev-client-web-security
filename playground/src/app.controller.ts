@@ -12,8 +12,10 @@ export class AppController {
   @Get()
   @Render('index')
   @UseGuards(ThrottlerGuard)
-  getIndex(@Req() request: Request) {
-    const config = this.configService.getConfig(request.cookies[ConfigKey])
+  async getIndex(@Req() request: Request) {
+    const config = await this.configService.getConfig(request.cookies[ConfigKey])
+
+    console.log(config)
 
     return config;
   }
