@@ -7,7 +7,7 @@
 	},
 	"scripts": {
 		"start": "cd playground/ && npm start",
-		"build": "npm config set -g production false && npm install -g @nestjs/cli && cd playground/ && npm install && npm run build"
+		"build": "npm install -g @nestjs/cli && cd playground/ && npm install -dev && npm run build"
 	},
 	"cacheDirectories": [
 		"playground/node_modules",
