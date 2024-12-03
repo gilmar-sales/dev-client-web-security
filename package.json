@@ -1,0 +1,27 @@
+{
+	"name": "dev-client-web-security",
+	"version": "0.1.0",
+	"description": "",
+	"engines": {
+		"node": "14.x"
+	},
+	"scripts": {
+		"start": "cd playground/ && npm start",
+		"build": "cd playground/ && npm install && npm run build"
+	},
+	"cacheDirectories": [
+		"playground/node_modules",
+		"fake-cdn/node_modules"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/gilmarxd/.git"
+	},
+	"keywords": [
+		"node",
+		"heroku",
+		"create-react-app",
+		"react"
+	],
+	"license": "MIT"
+}
