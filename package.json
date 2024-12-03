@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"description": "",
 	"engines": {
-		"node": "20.x"
+		"node": "22.x"
 	},
 	"scripts": {
 		"start": "cd playground/ && npm start",
