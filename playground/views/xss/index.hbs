@@ -20,11 +20,11 @@
 
             <h2>Memória Ram 16 GB DDR4</h2>
 
-                {{#each ratings as |rating|}}
-                {{{rating.message}}}
-                {{/each}}
+            {{#each ratings as |rating|}}
+            {{{rating.message}}}<br/>
+            {{/each}}
 
-            <form class="d-flex vh-100 flex-column" action="/xss/add-rating" method="post">
+            <form class="d-flex flex-column" action="/xss/add-rating" method="post">
                 <textarea id="ratingMessage" name="ratingMessage" rows="10" cols="80">
 <script>
     alert('Script Injetado!')
@@ -59,10 +59,7 @@
             el: '#vueApp',
             data: {
                 ratingMessage: "\<script\>\n alert('Script Injetado!')\n\<\/script\>",
-                ratings: [
-                {{#each ratings as |rating|}}
-                "{{rating.message}}"
-                {{/each}}]
+                ratings: []
             }
         })
     </script>

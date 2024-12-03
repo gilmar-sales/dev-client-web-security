@@ -6,7 +6,7 @@ import { ConfigKey } from 'src/middlewares/config-context-middleware';
 @Controller('csrf')
 export class CsrfController {
 
-  constructor(private readonly configService: ConfigService) {}
+  constructor(private readonly configService: ConfigService) { }
 
   @Get()
   @Render('csrf/home')
@@ -21,7 +21,7 @@ export class CsrfController {
   async setConfig(@Req() request: Request, @Res() response: Response) {
     if (!request.cookies[ConfigKey] && !request.signedCookies[ConfigKey])
       return response.status(500);
-    
+
     await this.configService.setConfig(request.cookies[ConfigKey], {
       csrf: {
         signedCookies: !!request.body.signedCookies,
@@ -53,8 +53,8 @@ export class CsrfController {
 
     const cookieOptions: CookieOptions = {
       sameSite: config.csrf.sameSiteCookies ? 'strict' : 'none',
-      domain: config.csrf.sameSiteCookies? undefined : 'app.github.dev',
-      secure: config.csrf.secureCookies  || !config.csrf.sameSiteCookies,
+      domain: config.csrf.sameSiteCookies ? undefined : 'app.github.dev',
+      secure: config.csrf.secureCookies || !config.csrf.sameSiteCookies,
       httpOnly: config.csrf.httpOnlyCookies,
       signed: config.csrf.signedCookies
     }
@@ -66,14 +66,26 @@ export class CsrfController {
       .redirect('/csrf');
   }
 
-  @Post('/logout')
-  logout(
+  @Post('logout')
+  async logout(
+    @Req() request: Request,
     @Res() response: Response,
   ) {
+
+    const config = await this.configService.getConfig(request.cookies[ConfigKey])
+
+    const cookieOptions: CookieOptions = {
+      sameSite: config.csrf.sameSiteCookies ? 'strict' : 'none',
+      domain: config.csrf.sameSiteCookies ? undefined : 'app.github.dev',
+      secure: config.csrf.secureCookies || !config.csrf.sameSiteCookies,
+      httpOnly: config.csrf.httpOnlyCookies,
+      signed: config.csrf.signedCookies
+    }
+
     return response
-      .clearCookie('token')
-      .clearCookie('username')
-      .clearCookie('password')
+      .clearCookie('token', cookieOptions)
+      .clearCookie('username', cookieOptions)
+      .clearCookie('password', cookieOptions)
       .redirect('/csrf/login');
   }
 }
