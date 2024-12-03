@@ -53,7 +53,7 @@ export class CsrfController {
 
     const cookieOptions: CookieOptions = {
       sameSite: config.csrf.sameSiteCookies ? 'strict' : 'none',
-      domain: config.csrf.sameSiteCookies ? undefined : 'app.github.dev',
+      domain: config.csrf.sameSiteCookies ? undefined : 'herokuapp.com',
       secure: config.csrf.secureCookies || !config.csrf.sameSiteCookies,
       httpOnly: config.csrf.httpOnlyCookies,
       signed: config.csrf.signedCookies
