@@ -49,6 +49,8 @@ export class CsrfController {
     if (!credencial.username || !credencial.password)
       return response.status(401).send();
 
+    console.log('credencial', credencial)
+
     const config = await this.configService.getConfig(request.cookies[ConfigKey])
 
     const cookieOptions: CookieOptions = {
