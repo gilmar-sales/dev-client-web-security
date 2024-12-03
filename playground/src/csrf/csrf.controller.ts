@@ -61,10 +61,12 @@ export class CsrfController {
       signed: config.csrf.signedCookies
     }
 
-    return await response
-      .cookie('token', 'imagine um token importante aqui', cookieOptions)
-      .cookie('username', credencial.username, cookieOptions)
-      .cookie('password', credencial.password, cookieOptions)
+    response
+    .cookie('token', 'imagine um token importante aqui', cookieOptions)
+    .cookie('username', credencial.username, cookieOptions)
+    .cookie('password', credencial.password, cookieOptions)
+
+    return response
       .redirect('/csrf');
   }
 
@@ -73,7 +75,6 @@ export class CsrfController {
     @Req() request: Request,
     @Res() response: Response,
   ) {
-
     const config = await this.configService.getConfig(request.cookies[ConfigKey])
 
     const cookieOptions: CookieOptions = {
