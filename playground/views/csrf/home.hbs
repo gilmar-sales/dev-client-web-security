@@ -5,7 +5,8 @@
   <meta charset="utf-8" />
   <title>App</title>
   <link rel="stylesheet" href="https://supreme-meme-7j6v5x4qqr3w69g-3001.app.github.dev/file?name=bootstrap.css" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src-elem 'none'; script-src 'none';">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://gigabyte5671.github.io/CookieManager/cookieManager.min.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -22,6 +23,26 @@
   <h1>
     Bem-vindo {{ username }}</h1>
   {{/if}}
+
+  <div class="d-flex flex-column justify-content-center align-items-center mt-5">
+    <h2>Cookies lidos pelo JavaScript</h2>
+
+    <ul id="cookieList">
+    </ul>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const listaCookies = document.getElementById('cookieList');
+
+      ['token', 'username', 'password'].forEach((cookie) => {
+
+        const li = document.createElement('li');
+        li.innerText = cookie + ' - ' + getCookie(cookie)
+        listaCookies.appendChild(li)
+      })
+    })
+  </script>
 </body>
 
 </html>
