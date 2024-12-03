@@ -1,7 +1,7 @@
 import { Cache, CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Inject, Injectable } from '@nestjs/common';
 
-type ConfigContext = {
+interface ConfigContext {
     csrf?: {
         secureCookies?: boolean,
         httpOnlyCookies?: boolean,
@@ -14,6 +14,7 @@ type ConfigContext = {
     },
     dos?: {
         rateLimiting?: boolean
+        requestCount?: number
     }
 }
 
@@ -30,10 +31,8 @@ export class ConfigService {
     {
         let config = await this.cacheManager.get<ConfigContext>(key);
 
-        console.log(config)
-
         if (!config)
-            throw new Error('No config found')
+            throw new Error('')
 
         return config
     }
@@ -52,8 +51,6 @@ export class ConfigService {
         let config = await this.getConfig(key);
 
         Object.keys(context).forEach(objKey => Object.assign(config[objKey], context[objKey]))
-
-        console.log(config)
 
         await this.cacheManager.set(key, config);
     }

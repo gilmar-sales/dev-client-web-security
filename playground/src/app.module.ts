@@ -12,14 +12,14 @@ import { ConfigContextMiddleware } from './middlewares/config-context-middleware
 
 @Module({
   imports: [CacheModule.register({ isGlobal: true, ttl: 2147483646 }), ThrottlerModule.forRoot([{
-    ttl: 60000,
-    limit: 10
+    ttl: 6000,
+    limit: 3
   }]), CsrfModule, XssModule, DoSModule, ConfigModule],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {
-  
+
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(ConfigContextMiddleware)
