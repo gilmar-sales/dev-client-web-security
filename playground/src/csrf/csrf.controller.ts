@@ -61,7 +61,7 @@ export class CsrfController {
       signed: config.csrf.signedCookies
     }
 
-    return response
+    return await response
       .cookie('token', 'imagine um token importante aqui', cookieOptions)
       .cookie('username', credencial.username, cookieOptions)
       .cookie('password', credencial.password, cookieOptions)
