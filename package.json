@@ -3,10 +3,10 @@
 	"version": "0.1.0",
 	"description": "",
 	"engines": {
-		"node": "22.x"
+		"node": "20.x"
 	},
 	"scripts": {
-		"start": "cd playground/ && npm start",
+		"start": "cd playground/ && npm run start:prod",
 		"build": "npm install -g @nestjs/cli && cd playground/ && npm install -dev && npm run build"
 	},
 	"cacheDirectories": [
