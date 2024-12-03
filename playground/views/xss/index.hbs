@@ -4,14 +4,68 @@
 <head>
     <meta charset="utf-8" />
     <title>Desenvolvimento de Cliente WEB - Criptografia e Segurança</title>
-    <link rel="stylesheet" href="https://supreme-meme-7j6v5x4qqr3w69g-3001.app.github.dev/file?name=boostrap.css" />
-    {{#if habilitaContentSecurityPolicy}}
-    <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self' https://avatars.githubusercontent.com; script-src-elem 'none'; script-src 'none';">
+    <link rel="stylesheet" href="https://supreme-meme-7j6v5x4qqr3w69g-3001.app.github.dev/file?name=bootstrap.css" />
+    {{#if xss.contentSecurityPolicy}}
+    <meta http-equiv="Content-Security-Policy" content="script-src-elem 'none'; script-src 'none';">
     {{/if}}
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 </head>
 
 <body>
+    <div class="d-flex vh-100 vw-50 justify-content-evenly">
+        <div class="d-flex vh-100 flex-column justify-content-center">
+            <h1>JavaScript Vanilla</h1>
+
+            <img width="300rem" src="/ram-ddr4.png" />
+
+            <h2>Memória Ram 16 GB DDR4</h2>
+
+                {{#each ratings as |rating|}}
+                {{{rating.message}}}
+                {{/each}}
+
+            <form class="d-flex vh-100 flex-column" action="/xss/add-rating" method="post">
+                <textarea id="ratingMessage" name="ratingMessage" rows="10" cols="80">
+<script>
+    alert('Script Injetado!')
+</script>
+            </textarea>
+
+                <button class="btn btn-primary" type="submit">Adicionar</button>
+            </form>
+        </div>
+
+        <div class="vr"></div>
+        <div id="vueApp" class="d-flex vh-100 flex-column justify-content-center">
+            <h1>VueJS</h1>
+
+            <img width="300rem" src="/ram-ddr4.png" />
+
+            <h2>Memória Ram 16 GB DDR4</h2>
+
+            <div v-for="(ratting, index) in ratings" v-html="ratting.message">
+            </div>
+
+            <textarea name="ratingMessage" rows="10" cols="80" v-model="ratingMessage">
+            </textarea>
+
+            <button v-on:click="() => {ratings.push({message: ratingMessage});}"
+                class="btn btn-primary">Adicionar</button>
+        </div>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: '#vueApp',
+            data: {
+                ratingMessage: "\<script\>\n alert('Script Injetado!')\n\<\/script\>",
+                ratings: [
+                {{#each ratings as |rating|}}
+                "{{rating.message}}"
+                {{/each}}]
+            }
+        })
+    </script>
 
     <script>
         var script = document.createElement('script');

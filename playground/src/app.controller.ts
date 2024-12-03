@@ -4,6 +4,7 @@ import { ThrottlerGuard } from '@nestjs/throttler';
 import { ConfigService } from './config/config.service';
 import { Request } from 'express';
 import { ConfigKey } from './middlewares/config-context-middleware';
+import { spawnSync } from "child_process";
 
 @Controller()
 export class AppController {
@@ -14,8 +15,6 @@ export class AppController {
   @UseGuards(ThrottlerGuard)
   async getIndex(@Req() request: Request) {
     const config = await this.configService.getConfig(request.cookies[ConfigKey])
-
-    console.log(config)
 
     return config;
   }

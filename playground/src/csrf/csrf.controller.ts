@@ -41,24 +41,28 @@ export class CsrfController {
   }
 
   @Post('login')
-  login(
+  async login(
     @Body() credencial: { username: string; password: string },
+    @Req() request: Request,
     @Res() response: Response,
   ) {
     if (!credencial.username || !credencial.password)
       return response.status(401).send();
 
+    const config = await this.configService.getConfig(request.cookies[ConfigKey])
+
     const cookieOptions: CookieOptions = {
-      sameSite: 'strict',
-      secure: true,
-      httpOnly: true,
-      signed: true
+      sameSite: config.csrf.sameSiteCookies ? 'strict' : 'none',
+      domain: config.csrf.sameSiteCookies? undefined : 'app.github.dev',
+      secure: config.csrf.secureCookies  || !config.csrf.sameSiteCookies,
+      httpOnly: config.csrf.httpOnlyCookies,
+      signed: config.csrf.signedCookies
     }
 
     return response
       .cookie('token', 'imagine um token importante aqui', cookieOptions)
       .cookie('username', credencial.username, cookieOptions)
-      .cookie('password', credencial.username, cookieOptions)
+      .cookie('password', credencial.password, cookieOptions)
       .redirect('/csrf');
   }
 

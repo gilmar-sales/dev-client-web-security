@@ -1,7 +1,7 @@
 import { Cache, CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Inject, Injectable } from '@nestjs/common';
 
-interface ConfigContext {
+type ConfigContext = {
     csrf?: {
         secureCookies?: boolean,
         httpOnlyCookies?: boolean,

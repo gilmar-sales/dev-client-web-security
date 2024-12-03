@@ -4,11 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <title>Desenvolvimento de Cliente WEB - Criptografia e Segurança</title>
-  <link rel="stylesheet" href="https://supreme-meme-7j6v5x4qqr3w69g-3001.app.github.dev/file?name=boostrap.css" />
-  {{#if xss.contentSecurityPolicy}}
-  <meta http-equiv="Content-Security-Policy"
-    content="script-src-elem 'none'; script-src 'none';">
-  {{/if}}
+  <link rel="stylesheet" href="/bootstrap.css" />
 </head>
 
 <body>
@@ -37,86 +33,86 @@
         <p>Ocorre quando sites de terceiros conseguem interceptar as credenciais dos usuários de um aplicativo.</p>
         <div class="px-4 pb-4">
           <div class="form-check">
-            <input class="form-check-input" name="secureCookies" type="checkbox" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
+            <input class="form-check-input" name="secureCookies" type="checkbox" id="secureCookies" {{#if
+              csrf.secureCookies}} checked {{/if}}>
+            <label class="form-check-label" for="secureCookies">
               Cookies Via SSL
             </label>
           </div>
 
           <div class="form-check">
-            <input class="form-check-input" name="httpOnlyCookies" type="checkbox" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
+            <input class="form-check-input" name="httpOnlyCookies" type="checkbox" id="httpOnlyCookies" {{#if
+              csrf.httpOnlyCookies}} checked {{/if}}>
+            <label class="form-check-label" for="httpOnlyCookies">
               Cookies HttpOnly
             </label>
           </div>
 
           <div class="form-check">
-            <input class="form-check-input" name="sameSiteCookies" type="checkbox" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
+            <input class="form-check-input" name="sameSiteCookies" type="checkbox" id="sameSiteCookies" {{#if
+              csrf.sameSiteCookies}} checked {{/if}}>
+            <label class="form-check-label" for="sameSiteCookies">
               Cookies SameSite Strict
             </label>
           </div>
 
           <div class="form-check">
-            {{csrf.signedCookies }}
-            <input class="form-check-input" name="signedCookies" type="checkbox" id="flexCheckDefault" {{#if csrf.signedCookies}} checked {{/if}}>
-            <label class="form-check-label" for="flexCheckDefault">
+            <input class="form-check-input" name="signedCookies" type="checkbox" id="signedCookies" {{#if
+              csrf.signedCookies}} checked {{/if}}>
+            <label class="form-check-label" for="signedCookies">
               Cookies Assinados
             </label>
           </div>
         </div>
         <button class="btn btn-primary" type="submit">Acessar ambiente CSRF</button>
       </form>
-      <div class="vw-100 p-4 d-flex flex-column justify-content-between">
-        <h3>Cross-Site Scripting</h3>
-        <p>Normalmente ocorre quando se utiliza conteúdos de terceiros (CDNs, Propagandas, etc...) em uma aplicação,
-          esses conteúdos podem conseguir injetar algum script malicioso.</p>
+      <form class="vw-100 p-4 d-flex flex-column justify-content-between" action="/xss" method="post">
+        <form class="vw-100 p-4 d-flex flex-column justify-content-between" action="/xss" method="post">
+          <h3>Cross-Site Scripting</h3>
+          <p>Normalmente ocorre quando se utiliza conteúdos de terceiros (CDNs, Propagandas, etc...) em uma aplicação,
+            esses conteúdos podem conseguir injetar algum script malicioso.</p>
 
-        <div class="px-4 pb-4">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              Habilitar Content-Security-Policy
-            </label>
+          <div class="px-4 pb-4">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="contentSecurityPolicy" id="contentSecurityPolicy" {{#if xss.contentSecurityPolicy}}
+                checked {{/if}}>
+              <label class="form-check-label" for="contentSecurityPolicy">
+                Habilitar Content-Security-Policy
+              </label>
+            </div>
+
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="sanitizeInput" id="sanitizeInput" {{#if xss.sanitizeInput}} checked
+                {{/if}}>
+              <label class="form-check-label" for="sanitizeInput">
+                Habilitar tratamento entrada (JS)
+              </label>
+            </div>
+          </div>
+          <button class="btn btn-primary" type="submit">Acessar ambiente XSS</button>
+        </form>
+        <form class="vw-100 p-4 d-flex flex-column justify-content-between" action="/dos" method="post">
+          <h3>Denial of Service</h3>
+          <p>Ataques de negação de serviço podem acontecer pela força bruta, que podem ser barrados com uma simples
+            limitação de requisições por usuário, porém, caso um usuário encontre um endpoint que possui um algoritmo
+            muito complexo assintoticamente, este endpoint poderá ser explorado para negar o serviço sem passar do
+            limite
+            de requisições.</p>
+
+          <div class="px-4 pb-4">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="rateLimiting" id="rateLimiting" {{#if dos.rateLimiting}} checked
+                {{/if}}>
+              <label class="form-check-label" for="rateLimiting">
+                Habilitar Rate Limiting
+              </label>
+            </div>
           </div>
 
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              Habilitar tratamento entrada (JS)
-            </label>
-          </div>
-        </div>
-
-        <a class="btn btn-primary" href="/xss">Acessar ambiente XSS</a>
-      </div>
-      <div class="vw-100 p-4 d-flex flex-column justify-content-between">
-        <h3>Denial of Service</h3>
-        <p>Ataques de negação de serviço podem acontecer pela força bruta, que podem ser barrados com uma simples
-          limitação de requisições por usuário, porém, caso um usuário encontre um endpoint que possui um algoritmo
-          muito complexo assintoticamente, este endpoint poderá ser explorado para negar o serviço sem passar do limite
-          de requisições.</p>
-
-        <div class="px-4 pb-4">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              Habilitar Rate Limiting
-            </label>
-          </div>
-        </div>
-
-        <a class="btn btn-primary" href="/dos">Acessar ambiente DoS</a>
-      </div>
+          <a class="btn btn-primary" href="/dos">Acessar ambiente DoS</a>
+        </form>
     </div>
   </div>
-  <script>
-    var script = document.createElement('script');
-    script.nonce = "fake-cdn";
-    script.src = 'https://supreme-meme-7j6v5x4qqr3w69g-3001.app.github.dev/file?name=jquery.js';
-    script.type = 'text/javascript';
-    document.getElementsByTagName('head')[0].appendChild(script);
-  </script>
 </body>
 
 </html>

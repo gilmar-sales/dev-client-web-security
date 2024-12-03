@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { ThrottlerModule } from '@nestjs/throttler';
 
 import { AppController } from './app.controller';
@@ -8,9 +8,10 @@ import { XssModule } from './xss/xss.module';
 import { DoSModule } from './dos/dos.module';
 import { ConfigModule } from './config/config.module';
 import { CacheModule } from '@nestjs/cache-manager';
+import { ConfigContextMiddleware } from './middlewares/config-context-middleware';
 
 @Module({
-  imports: [CacheModule.register({ isGlobal: true }), ThrottlerModule.forRoot([{
+  imports: [CacheModule.register({ isGlobal: true, ttl: 2147483646 }), ThrottlerModule.forRoot([{
     ttl: 60000,
     limit: 10
   }]), CsrfModule, XssModule, DoSModule, ConfigModule],
@@ -18,4 +19,10 @@ import { CacheModule } from '@nestjs/cache-manager';
   providers: [AppService],
 })
 export class AppModule {
+  
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(ConfigContextMiddleware)
+      .forRoutes('*');
+  }
 }
